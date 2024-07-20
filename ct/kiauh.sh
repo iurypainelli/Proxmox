@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build.func)
+source <(curl -s https://raw.githubusercontent.com/iurypainelli/Proxmox/feature/kiauh/misc/build.func)
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
@@ -48,25 +48,23 @@ function default_settings() {
   MAC=""
   VLAN=""
   SSH="no"
-  VERB="no"
+  VERB="yes"
   echo_default
 }
 
 function update_script() {
 header_info
-if [[ ! -f ~/kiauh/kiauh.sh ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
+if [[ ! -f /opt/kiauh /kiauh.sh ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
 msg_info "Updating ${APP} LXC"
 apt-get update &>/dev/null
 apt-get -y upgrade &>/dev/null
-msg_ok "Updated ${APP} LXC"
+msg_ok "Updated ${APP} LXC" 
 exit
 }
 
 start
 build_container
 description
-
-./kiauh/kiauh.sh
 
 msg_ok "Completed Successfully!\n"
 echo -e "${APP} should be reachable by going to the following URL.

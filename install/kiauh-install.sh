@@ -20,11 +20,13 @@ $STD apt-get install -y mc
 $STD apt-get install -y git
 msg_ok "Installed Dependencies"
 
-
-msg_info "Installing kiauh"
-cd ~ && git clone https://github.com/dw-0/kiauh.git
-./kiauh/kiauh.sh
-msg_ok "Installed kiauh"
+msg_info "Setting up kiauh"
+$STD mkdir -p /opt/kiauh
+$STD git clone --depth 1 https://github.com/dw-0/kiauh.git /opt/kiauh
+$STD useradd -d /opt/kiauh kiauh
+$STD chown -R kiauh:kiauh /opt/kiauh
+# $STD su kiauh -s /bin/sh -c "./opt/kiauh/kiauh.sh"
+msg_ok "Set up kiauh"
 
 motd_ssh
 customize
